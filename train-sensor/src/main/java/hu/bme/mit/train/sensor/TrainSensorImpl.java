@@ -3,12 +3,24 @@ package hu.bme.mit.train.sensor;
 import hu.bme.mit.train.interfaces.TrainController;
 import hu.bme.mit.train.interfaces.TrainSensor;
 import hu.bme.mit.train.interfaces.TrainUser;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.time.LocalTime;
+import com.google.common.collect.ArrayTable;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.ImmutableTable;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Table;
+import com.google.common.collect.TreeBasedTable;
 
 public class TrainSensorImpl implements TrainSensor {
 
 	private TrainController controller;
 	private TrainUser user;
 	private int speedLimit = 5;
+	public Table<LocalTime, Integer, Integer> tacho;
+
 
 	public TrainSensorImpl(TrainController controller, TrainUser user) {
 		this.controller = controller;
@@ -24,6 +36,15 @@ public class TrainSensorImpl implements TrainSensor {
 	public void overrideSpeedLimit(int speedLimit) {
 		this.speedLimit = speedLimit;
 		controller.setSpeedLimit(speedLimit);
+	}
+
+	public void refereshTacho() {
+		tacho = HashBasedTable.create();
+		tacho.put(LocalTime.now(), 1, 1);
+	}
+
+	public Table<LocalTime, Integer, Integer> getTacho(){
+		return tacho;
 	}
 
 }
