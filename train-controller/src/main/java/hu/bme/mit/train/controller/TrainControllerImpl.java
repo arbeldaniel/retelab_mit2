@@ -7,8 +7,28 @@ public class TrainControllerImpl implements TrainController {
 	private int step = 0;
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
-
+	private Thread thread;
 	private boolean mergeconflict = true;
+
+	public TrainControllerImp()
+	{
+		thread = new Thread(){
+			public void run()
+			{
+				thread.run();
+				try
+				{
+					followSpeed();
+					thread.sleep(2000);
+				}catch(InterruptedException exception)
+				{
+					exception.printStackTrace();
+				}
+			}
+		};
+		
+	};
+
 
 	@Override
 	public void followSpeed() {
