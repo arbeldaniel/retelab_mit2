@@ -10,7 +10,7 @@ public class TrainControllerImpl implements TrainController {
 	private Thread thread;
 	private boolean mergeconflict = true;
 
-	public TrainControllerImp()
+	public TrainControllerImpl()
 	{
 		thread = new Thread(){
 			public void run()
