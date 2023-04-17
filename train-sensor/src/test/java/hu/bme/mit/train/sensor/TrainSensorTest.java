@@ -12,11 +12,42 @@ import static org.mockito.Mockito.*;
 public class TrainSensorTest {
     private TrainController tc;
     private TrainUser tu;
+    private TrainSensorImpl trainSensor;
 
     @Before
     public void before() {
-        // TODO Add initializations
+        tc = mock(TrainController.class);
+        tu = mock(TrainUser.class);
+        trainSensor = new TrainSensorImpl(tc, tu);
     }
+
+    
+    @Test
+    public void SpeedLimitMinTest()
+    {
+        trainSensor.overrideSpeedLimit(-1);
+        verify(tu, times(1)).setAlarmState(true);
+    }
+    @Test
+    public void SpeedLimitMaxTest()
+    {
+        trainSensor.overrideSpeedLimit(501);
+        verify(tu,times(1)).setAlarmState(true);
+    }
+    @Test
+    public void SpeedLimitRealMarginTest()
+    {
+        trainSensor.overrideSpeedLimit(4);
+        verify(tu, times(1)).setAlarmState(true);
+    }
+
+    @Test
+    public void SpeedLimitBetweenTest()
+    {
+        trainSensor.overrideSpeedLimit(300);
+        verify(tu, times(1)).setAlarmState(true);
+    }
+
 
     @Test
     public void ThisIsAnExampleTestStub() {
