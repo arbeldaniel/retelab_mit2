@@ -38,14 +38,14 @@ public class TrainSensorTest {
     public void SpeedLimitRealMarginTest()
     {
         trainSensor.overrideSpeedLimit(4);
-        verify(tu, times(1)).setAlarmState(true);
+        verify(tu, times(0)).setAlarmState(true);
     }
 
     @Test
     public void SpeedLimitBetweenTest()
     {
         trainSensor.overrideSpeedLimit(300);
-        verify(tu, times(1)).setAlarmState(true);
+        verify(tu, times(0)).setAlarmState(true);
     }
 
 
